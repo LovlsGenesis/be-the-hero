@@ -41,7 +41,7 @@ module.exports = {
     },
 
 
-    async destroy(request, response) {
+    async delete(request, response) {
         const { id } = request.params;
         const ong_id = request.headers.authorization;
 
@@ -49,8 +49,7 @@ module.exports = {
             .where('id', id)
             .select('ong_id')
             .first();
-
-        if (incident.ong_id != ong_id ) {
+        if (incident.ong_id !== ong_id ) {
             return response.status(400).json({error: 'Operation not permitted'});
         }
 
